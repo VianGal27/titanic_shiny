@@ -1,0 +1,574 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={¿Qué pasajeros sobrevivirán al naufragio del RMS Titanic?},
+  pdfauthor={RG},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{¿Qué pasajeros sobrevivirán al naufragio del RMS Titanic?}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Ejercicio Práctico Minería y Análisis de Datos}
+\author{RG}
+\date{14/09/2022}
+
+\begin{document}
+\maketitle
+
+\hypertarget{lectura-de-los-datos.}{%
+\subsection{1) Lectura de los datos.}\label{lectura-de-los-datos.}}
+
+Para esta práctica utilizaremos el archivo TITANIC.CSV. La base incluye
+información relevante para describir el estado de supervivencia y datos
+particulares de los pasajeros del RMS Titanic (no contiene información
+de la tripulación). La fuente principal de los datos es la Enciclopedia
+Titanica y contiene las aportaciones de varios investigadores.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{datos }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"./data/titanic.csv"}\NormalTok{)}
+\NormalTok{datos }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(datos)}
+\CommentTok{\#View(datos)}
+\end{Highlighting}
+\end{Shaded}
+
+Las variables con las que trabajaremos a lo largo de este documento son
+las siguientes
+
+\begin{itemize}
+\item
+  \emph{Name}: Nombre del pasajero.
+\item
+  \emph{Survived}: Dummy que indica si sobrevivió (1) o no sobrevivió
+  (0).
+\item
+  \emph{Pclass}:Tipo de clase en la que viajó (1=1st; 2=2nd; 3=3rd).
+\item
+  \emph{Age}: Edad del pasajero.
+\item
+  \emph{Sex}: Sexo del pasajero.
+\item
+  \emph{Fare}: Tarifa que pagó el pasajero.
+\item
+  \emph{Siblings\_Spouses}: Indica el número de hermanos y/o cónyuges
+  que lo acompañaron.
+\item
+  \emph{Parents\_Children}:Indica el número de padres y/o hijos que lo
+  acompañaron.
+\end{itemize}
+
+Se crearon ademas dos variables:
+
+\begin{itemize}
+\item
+  \emph{Fare\_grps}: Indicadora de si el pasajero gasto menos de 60
+  libras o más de 60 libras en el boleto.
+\item
+  \emph{Family\_size}: Numero de integrantes de la familia del pasajero.
+  Se construyó con la suma de de las variables Siblings\_Spouses y
+  Parents\_Children. Cuando su valor es igual a cero implica que el
+  individuo viajó sin familiares directos.
+\end{itemize}
+
+\hypertarget{relaciones-esperadas.}{%
+\subsection{2) Relaciones esperadas.}\label{relaciones-esperadas.}}
+
+Empezaremos por explorar los valores de las correlaciones de las
+variables. Para ello elaboraremos un gráfico con la información.
+
+\hypertarget{matriz-de-correlaciones}{%
+\subsubsection{Matriz de Correlaciones}\label{matriz-de-correlaciones}}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{titanic_files/figure-latex/correlaciones-1} \end{center}
+
+\hypertarget{anuxe1lisis-gruxe1fico}{%
+\subsubsection{Análisis Gráfico}\label{anuxe1lisis-gruxe1fico}}
+
+Nos enfocaremos en entender la distribución y las diferentes
+características de nuestros datos mediante un análisis gráfico de
+algunas de las variables.
+
+\begin{center}\includegraphics[width=0.8\linewidth]{titanic_files/figure-latex/Graf1-1} \end{center}
+
+Podemos observar que de los 887 pasajeros de los cuales tenemos
+información únicamente 342 de ellos sobrevivieron. Lamentablemente poco
+más del 60\% de los pasajeros falleció.
+
+\begin{center}\includegraphics[width=0.6\linewidth]{titanic_files/figure-latex/Graf2-1} \end{center}
+
+Para tener una mejor idea de lo que sucedió tras el accidente del
+Titanic en la gráfica anterior volvemos a concentrarnos en el numero de
+sobrevivientes, pero considerando el sexo. Como podemos observar, de los
+342 pasajeros que sobrevivieron, 233 (alrededor del 68\%) fueron mujeres
+y 109 fueron hombres. En el caso de los pasajeros que no sobrevivieron
+464 (cerca del 85\% del total) eran hombres.
+
+\begin{center}\includegraphics[width=0.8\linewidth]{titanic_files/figure-latex/Graf3-1} \end{center}
+
+Un punto interesante para analizar es respecto a las diferentes clases
+en las que los pasajeros se podían alojar. Al separar a los
+sobrevivientes según el tipo de boleto que tenían podemos observar que,
+en proporción al total de personas por clase, los de primera fueron el
+grupo con mayor numero de sobrevivientes, después los de segunda clase y
+por ultimo los de tercera. Si bien las tres clases tuvieron pasajeros
+que fallecieron, la tercera clase es la más afectada con alrededor del
+67\% de fallecidos.
+
+\begin{center}\includegraphics[width=0.8\linewidth]{titanic_files/figure-latex/Graf4-1} \end{center}
+
+Otro aspecto importante del problema es comprender como el suceso afectó
+a los diferentes grupos de edad. Podemos observar que la mayor cantidad
+tanto de sobrevivientes como de no sobrevivientes está entre los grupos
+de 10 a 40 años.
+
+Para entender mejor los resultados del gráfico anterior presentamos el
+histograma de las edades de los pasajeros.
+
+\begin{center}\includegraphics[width=0.7\linewidth]{titanic_files/figure-latex/Graf5-1} \end{center}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{titanic_files/figure-latex/Graf6-1} \end{center}
+
+Un punto importante al viajar es saber si se realizó sólo o acompañado.
+Para analizar este punto consideramos la información de la variable que
+construimos respecto al tamaño de la familia. Los datos nos muestran que
+aquellos que viajaban solos (0 en tamaño de la familia) fueron el grupo
+que concentro el mayor numero de pasajeros que no sobrevivieron.
+
+Nuevamente presentamos el histograma del tamaño de las familias de los
+pasajeros para enriquecer la interpretación de los resultados del
+gráfico anterior.
+
+\begin{center}\includegraphics[width=0.6\linewidth]{titanic_files/figure-latex/Graf7-1} \end{center}
+
+Por último, respecto de las variables con las que contamos es importante
+comprender el histograma de la tarifa que cubrieron cada uno de los
+pasajeros. Dado que el tipo de clase en la que se viajaba fue un
+determinante importante de la probabilidad de no sobrevivir, esto nos
+ayudará a entender el gasto por boleto que se realizó.
+
+\begin{center}\includegraphics[width=0.8\linewidth]{titanic_files/figure-latex/Graf8-1} \end{center}
+
+La variable \emph{Fare\_grps} se creo pensando en que un boleto que
+costará mas de 60 libras incorporaría la información de los pasajeros
+con más recursos. Lo anterior sin importar si se encontraba en primera o
+segunda clase.
+
+\hypertarget{algunos-gruxe1ficos-adicionales}{%
+\subsubsection{Algunos Gráficos
+Adicionales}\label{algunos-gruxe1ficos-adicionales}}
+
+\begin{center}\includegraphics[width=0.9\linewidth]{titanic_files/figure-latex/Graf9-1} \end{center}
+
+\begin{center}\includegraphics[width=0.9\linewidth]{titanic_files/figure-latex/Graf10-1} \end{center}
+
+\begin{center}\includegraphics[width=0.9\linewidth]{titanic_files/figure-latex/Graf11-1} \end{center}
+
+\begin{center}\includegraphics[width=0.9\linewidth]{titanic_files/figure-latex/Graf12-1} \end{center}
+
+\begin{center}\includegraphics[width=0.9\linewidth]{titanic_files/figure-latex/Graf13-1} \end{center}
+
+\begin{center}\includegraphics[width=1\linewidth]{titanic_files/figure-latex/Graf14-1} \end{center}
+
+\hypertarget{estimaciuxf3n-del-modelo.}{%
+\subsection{3) Estimación del modelo.}\label{estimaciuxf3n-del-modelo.}}
+
+\hypertarget{probabilidad-de-sobrevivir---modelo-logit}{%
+\subsubsection{Probabilidad de Sobrevivir - Modelo
+Logit}\label{probabilidad-de-sobrevivir---modelo-logit}}
+
+En primer lugar nos interesa entender que determinó la probabilidad de
+sobrevivir. Para estimar un modelo que nos ayude a comprender este
+dilema utilizaremos varios modelos Logit. La diferencia entre cada una
+de las especificaciones será el tipo de variables que agreguemos.
+
+De las variables que analizamos en la sección anterior elegimos como
+base incorporar \emph{Pclass, Sex, Age}. Los diferentes modelos que
+especificamos para el logit tendrán como diferencia como tratamos las
+variables \emph{Fare, Siblings\_Spouses, Parents\_Children}.
+
+En cuanto a la variable \emph{Fare}, algunos modelos la consideraran tal
+como está reportada en la base de datos y en otros utilizaremos
+\emph{Fare\_grps}. Esta última variable se incorpora pensando que el
+gasto en el boleto pudo tener ciertos rangos al considerar las
+características de cada pasajero. La intención es ver cual variable
+resulta mejor.
+
+Respecto las variables Siblings\_Spouses, Parents\_Children y
+Family\_size, en algunas especificaciones buscaremos ver si el modelo
+responde mejor al numero total de integrantes de la familia en
+comparación contra la separación que tenia la base con las variables
+Siblings\_Spouses y Parents\_Children.
+
+\begingroup 
+\small 
+\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-1.8ex] & \multicolumn{4}{c}{Survived} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
+\hline \\[-1.8ex] 
+ Pclass & 0.3080$^{***}$ & 0.2870$^{***}$ & 0.3121$^{***}$ & 0.2880$^{***}$ \\ 
+  & (0.1461) & (0.1431) & (0.1456) & (0.1424) \\ 
+  Sexmale & 0.0635$^{***}$ & 0.0633$^{***}$ & 0.0624$^{***}$ & 0.0621$^{***}$ \\ 
+  & (0.2004) & (0.2006) & (0.1995) & (0.1995) \\ 
+  Age & 0.9575$^{***}$ & 0.9571$^{***}$ & 0.9586$^{***}$ & 0.9583$^{***}$ \\ 
+  & (0.0077) & (0.0077) & (0.0077) & (0.0077) \\ 
+  Fare & 1.0028 &  & 1.0030 &  \\ 
+  & (0.0024) &  & (0.0024) &  \\ 
+  Fare\_grps0-60 &  & 0.9216 &  & 0.9343 \\ 
+  &  & (0.3215) &  & (0.3189) \\ 
+  Siblings\_Spouses & 0.6691$^{***}$ & 0.6771$^{***}$ &  &  \\ 
+  & (0.1107) & (0.1105) &  &  \\ 
+  Parents\_Children & 0.8990 & 0.9231 &  &  \\ 
+  & (0.1186) & (0.1165) &  &  \\ 
+  Family\_size &  &  & 0.7635$^{***}$ & 0.7793$^{***}$ \\ 
+  &  &  & (0.0683) & (0.0672) \\ 
+  Constant & 199.7870$^{***}$ & 272.7150$^{***}$ & 188.0133$^{***}$ & 260.8904$^{***}$ \\ 
+  & (0.5574) & (0.5275) & (0.5546) & (0.5253) \\ 
+ \hline \\[-1.8ex] 
+Observations & 887 & 887 & 887 & 887 \\ 
+Log Likelihood & $-$390.4660 & $-$391.1823 & $-$391.7938 & $-$392.6551 \\ 
+Akaike Inf. Crit. & 794.9319 & 796.3646 & 795.5877 & 797.3102 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\endgroup
+
+\begin{itemize}
+\item
+  El modelo 1 y 3 utilizan a la variable Fare y permiten ver como cambia
+  el resultado de la especificación al usar el numero total de miembros
+  de la familia vs sus componentes separados. Los modelos 2 y 4 miden la
+  incorporación de Fare\_grps y nos permiten comparar las diferencias de
+  la familia.
+\item
+  Las variables Sex, Age y Pclass en todos los modelos conservan su
+  significancia y tienen cambios mínimos en el valor de sus
+  coeficientes. Podemos interpretar de ellas que cambiar de clase (pasar
+  de 1era a 2nda o de 1era a 3era) reduce en un 70\% la probabilidad de
+  sobrevivir. En el caso de Sex observamos que ser hombre, está
+  relacionado a una disminución del 93\% en la probabilidad de
+  sobrevivir. Para Age, un aumento en los años del pasajero reduce en
+  4.25\% la probabilidad de sobrevivir.
+\item
+  Las variables relativas a la tarifa que pagaron los pasajeros resultan
+  ser no significativas. Podemos concluir que no es relevante para
+  cambiar la probabilidad de supervivencia ese gasto ni su análisis por
+  grupos.
+\item
+  Respecto a los acompañantes del pasajero. En los modelos 1 y 3
+  pareciera que sólo es importante la información de si viajó con
+  hermanos y/o esposa y no tanto si lo hizo con hijos o sus padres. Sin
+  embargo con los modelo 2 y 4, podemos ver que el tamaño completo de la
+  Familia es importante. En resumen, tener uno o más familiares abordo
+  reduce la probabilidad de sobrevivir en alrededor del 21\%.
+\end{itemize}
+
+\emph{Separando entre clases}
+
+\begingroup 
+\small 
+\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-1.8ex] & \multicolumn{4}{c}{Survived} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
+\hline \\[-1.8ex] 
+ Class\_2 & 0.3130$^{***}$ & 0.2735$^{***}$ & 0.3252$^{***}$ & 0.2790$^{***}$ \\ 
+  & (0.3010) & (0.2972) & (0.2990) & (0.2948) \\ 
+  Class\_3 & 0.0954$^{***}$ & 0.0812$^{***}$ & 0.0987$^{***}$ & 0.0821$^{***}$ \\ 
+  & (0.3047) & (0.2975) & (0.3034) & (0.2956) \\ 
+  Sexmale & 0.0635$^{***}$ & 0.0632$^{***}$ & 0.0625$^{***}$ & 0.0620$^{***}$ \\ 
+  & (0.2006) & (0.2008) & (0.1998) & (0.1997) \\ 
+  Age & 0.9575$^{***}$ & 0.9569$^{***}$ & 0.9588$^{***}$ & 0.9582$^{***}$ \\ 
+  & (0.0078) & (0.0078) & (0.0078) & (0.0077) \\ 
+  Fare & 1.0028 &  & 1.0031 &  \\ 
+  & (0.0025) &  & (0.0025) &  \\ 
+  Fare\_grps0-60 &  & 0.9355 &  & 0.9434 \\ 
+  &  & (0.3317) &  & (0.3287) \\ 
+  Siblings\_Spouses & 0.6693$^{***}$ & 0.6766$^{***}$ &  &  \\ 
+  & (0.1108) & (0.1106) &  &  \\ 
+  Parents\_Children & 0.8986 & 0.9236 &  &  \\ 
+  & (0.1188) & (0.1165) &  &  \\ 
+  Family\_size &  &  & 0.7634$^{***}$ & 0.7792$^{***}$ \\ 
+  &  &  & (0.0683) & (0.0672) \\ 
+  Constant & 60.9331$^{***}$ & 79.2628$^{***}$ & 57.2548$^{***}$ & 75.7447$^{***}$ \\ 
+  & (0.4636) & (0.4604) & (0.4603) & (0.4583) \\ 
+ \hline \\[-1.8ex] 
+Observations & 887 & 887 & 887 & 887 \\ 
+Log Likelihood & $-$390.4641 & $-$391.1650 & $-$391.7815 & $-$392.6474 \\ 
+Akaike Inf. Crit. & 796.9282 & 798.3301 & 797.5630 & 799.2949 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\endgroup
+
+-Esta especificación nos permite comparar los cambios en clase. Podemos
+observar dos cosas importantes. Para un pasajero en segunda clase su
+probabilidad de no sobrevivir aumenta en alrededor de un 70\% respecto
+de uno de primera clase. La segunda, un pasajero de tercera clase tiene
+un 90\% más de probabilidad de no sobrevivir en comparación con un
+pasajero de primera clase.
+
+\hypertarget{diferencias-entre-clases-de-viaje---modelo-logit-ordenado}{%
+\subsubsection{Diferencias entre clases de viaje - Modelo Logit
+Ordenado}\label{diferencias-entre-clases-de-viaje---modelo-logit-ordenado}}
+
+Un segundo análisis que elaboraremos será entorno a la clase en la que
+los pasajeros viajaban. Para esta sección utilizaremos un logit ordenado
+para poder entender las diferencias entre clases. Al igual que en el
+punto anterior la diferencia entre cada una de las especificaciones será
+el tipo de variables que agreguemos.
+
+\begingroup 
+\scriptsize 
+\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-1.8ex] & \multicolumn{4}{c}{Pclass} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
+\hline \\[-1.8ex] 
+ Sexmale & 0.6992$^{*}$ & 0.5874$^{***}$ & 0.6622$^{**}$ & 0.5589$^{***}$ \\ 
+  & (0.1915) & (0.1635) & (0.1882) & (0.1613) \\ 
+  Age & 1.0402$^{***}$ & 1.0593$^{***}$ & 1.0413$^{***}$ & 1.0602$^{***}$ \\ 
+  & (0.0068) & (0.0061) & (0.0069) & (0.0061) \\ 
+  Fare & 1.1810$^{***}$ &  & 1.1779$^{***}$ &  \\ 
+  & (0.0119) &  & (0.0119) &  \\ 
+  Fare\_grps0-60 &  & 0.0131$^{***}$ &  & 0.0146$^{***}$ \\ 
+  &  & (0.3644) &  & (0.3498) \\ 
+  Siblings\_Spouses & 0.2743$^{***}$ & 0.6724$^{***}$ &  &  \\ 
+  & (0.1710) & (0.0915) &  &  \\ 
+  Parents\_Children & 0.4527$^{***}$ & 0.9440 &  &  \\ 
+  & (0.1394) & (0.1048) &  &  \\ 
+  Family\_size &  &  & 0.3551$^{***}$ & 0.7796$^{***}$ \\ 
+  &  &  & (0.1026) & (0.0596) \\ 
+ \hline \\[-1.8ex] 
+Observations & 887 & 887 & 887 & 887 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\endgroup
+
+\begin{itemize}
+\tightlist
+\item
+  Las especificaciones anteriores siguen la misma lógica que los del
+  apartado anterior. Todos consideran Age, Sex y buscamos comparar las
+  diferentes variables para la tarifa (Fare vs Fare\_grps) y para la
+  forma de considerar a los acompañantes.
+\end{itemize}
+
+-Podemos concluir dos cosas. La primera, la diferencia del modelo para
+estimar si sobrevive o no, la variable que incorpore la información de
+la tarifa pagada es importante (más allá de si es en valor directo o por
+grupo)pero resulta mejor la interpretación y el uso de Fare. La segunda,
+nuevamente es una mejor opción el considerar a todos los acompañantes
+(familiares) que acompañaron al pasajero.
+
+-Respecto de los resultados. Ser hombre disminuye en alrededor de un
+35\% la probabilidad de cambiar de clase. Un aumento en la edad del
+pasajero aumenta en alrededor de un 4.5\% la probabilidad de cambiar de
+clase. Un cambio en la tarifa que debe cubrir el pasajero aumenta en un
+17\% la probabilidad de cambiar de clase (de primera a segunda o de
+segunda a tercera). Este ultimo punto se puede entender en que se vuelve
+más caro el boleto y por eso buscas una clase más baja pero asequible.
+Por último, el viajar con uno o más familiares disminuye la probabilidad
+de cambiar de clase.
+
+\hypertarget{apuxe9ndice-tablas}{%
+\subsection{4) Apéndice Tablas}\label{apuxe9ndice-tablas}}
+
+Modelos logit sin transformar los valores de los coeficientes.
+
+\hypertarget{probabilidad-de-sobrevivir}{%
+\subsubsection{\texorpdfstring{\emph{Probabilidad de
+sobrevivir}}{Probabilidad de sobrevivir}}\label{probabilidad-de-sobrevivir}}
+
+\begingroup 
+\scriptsize 
+\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-1.8ex] & \multicolumn{4}{c}{Survived} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
+\hline \\[-1.8ex] 
+ Class\_2 & $-$1.1615$^{***}$ & $-$1.2965$^{***}$ & $-$1.1233$^{***}$ & $-$1.2767$^{***}$ \\ 
+  & (0.3010) & (0.2972) & (0.2990) & (0.2948) \\ 
+  Class\_3 & $-$2.3500$^{***}$ & $-$2.5113$^{***}$ & $-$2.3155$^{***}$ & $-$2.4993$^{***}$ \\ 
+  & (0.3047) & (0.2975) & (0.3034) & (0.2956) \\ 
+  Sexmale & $-$2.7567$^{***}$ & $-$2.7615$^{***}$ & $-$2.7733$^{***}$ & $-$2.7804$^{***}$ \\ 
+  & (0.2006) & (0.2008) & (0.1998) & (0.1997) \\ 
+  Age & $-$0.0434$^{***}$ & $-$0.0440$^{***}$ & $-$0.0421$^{***}$ & $-$0.0427$^{***}$ \\ 
+  & (0.0078) & (0.0078) & (0.0078) & (0.0077) \\ 
+  Fare & 0.0028 &  & 0.0031 &  \\ 
+  & (0.0025) &  & (0.0025) &  \\ 
+  Fare\_grps0-60 &  & $-$0.0667 &  & $-$0.0583 \\ 
+  &  & (0.3317) &  & (0.3287) \\ 
+  Siblings\_Spouses & $-$0.4016$^{***}$ & $-$0.3907$^{***}$ &  &  \\ 
+  & (0.1108) & (0.1106) &  &  \\ 
+  Parents\_Children & $-$0.1069 & $-$0.0795 &  &  \\ 
+  & (0.1188) & (0.1165) &  &  \\ 
+  Family\_size &  &  & $-$0.2699$^{***}$ & $-$0.2495$^{***}$ \\ 
+  &  &  & (0.0683) & (0.0672) \\ 
+  Constant & 4.1098$^{***}$ & 4.3728$^{***}$ & 4.0475$^{***}$ & 4.3274$^{***}$ \\ 
+  & (0.4636) & (0.4604) & (0.4603) & (0.4583) \\ 
+ \hline \\[-1.8ex] 
+Observations & 887 & 887 & 887 & 887 \\ 
+Log Likelihood & $-$390.4641 & $-$391.1650 & $-$391.7815 & $-$392.6474 \\ 
+Akaike Inf. Crit. & 796.9282 & 798.3301 & 797.5630 & 799.2949 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\endgroup
+
+\hypertarget{tipo-de-clase}{%
+\subsubsection{\texorpdfstring{\emph{Tipo de
+Clase}}{Tipo de Clase}}\label{tipo-de-clase}}
+
+\begingroup 
+\scriptsize 
+\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-1.8ex] & \multicolumn{4}{c}{Pclass} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
+\hline \\[-1.8ex] 
+ Sexmale & $-$0.3578$^{*}$ & $-$0.5321$^{***}$ & $-$0.4122$^{**}$ & $-$0.5818$^{***}$ \\ 
+  & (0.1915) & (0.1635) & (0.1882) & (0.1613) \\ 
+  Age & 0.0394$^{***}$ & 0.0576$^{***}$ & 0.0405$^{***}$ & 0.0584$^{***}$ \\ 
+  & (0.0068) & (0.0061) & (0.0069) & (0.0061) \\ 
+  Fare & 0.1663$^{***}$ &  & 0.1638$^{***}$ &  \\ 
+  & (0.0119) &  & (0.0119) &  \\ 
+  Fare\_grps0-60 &  & $-$4.3388$^{***}$ &  & $-$4.2291$^{***}$ \\ 
+  &  & (0.3644) &  & (0.3498) \\ 
+  Siblings\_Spouses & $-$1.2935$^{***}$ & $-$0.3969$^{***}$ &  &  \\ 
+  & (0.1710) & (0.0915) &  &  \\ 
+  Parents\_Children & $-$0.7926$^{***}$ & $-$0.0576 &  &  \\ 
+  & (0.1394) & (0.1048) &  &  \\ 
+  Family\_size &  &  & $-$1.0354$^{***}$ & $-$0.2490$^{***}$ \\ 
+  &  &  & (0.1026) & (0.0596) \\ 
+ \hline \\[-1.8ex] 
+Observations & 887 & 887 & 887 & 887 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\endgroup
+
+\end{document}
