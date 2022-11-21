@@ -60,7 +60,7 @@ passengers_table_module_ui <- function(id) {
 
 passengers_table_module <- function(input, output, session) {
 
-  # trigegr to reload data from the titanic table
+  # trigger to reload data from the titanic table
   session$userData$mtpassengers_trigger <- reactiveVal(0)
 
   # Read in titanic table from the database
@@ -70,7 +70,7 @@ passengers_table_module <- function(input, output, session) {
     out <- NULL
     tryCatch({
       out <- 
-        dbGetQuery(conn,"SELECT * FROM titanic") #%>%
+        dbGetQuery(conn,"SELECT * FROM titanic")
     }, error = function(err) {
 
 
@@ -136,10 +136,6 @@ passengers_table_module <- function(input, output, session) {
     datatable(
       out,
       rownames = FALSE,
-      #colnames = c('Model', 'Miles/Gallon', 'Cylinders', 'Displacement (cu.in.)',
-      #             'Horsepower', 'Rear Axle Ratio', 'Weight (lbs)', '1/4 Mile Time',
-      #             'Engine', 'Transmission', 'Forward Gears', 'Carburetors', 'Created At',
-      #             'Created By', 'Modified At', 'Modified By'),
       colnames = c('survived', 'pclass', 'name', 'sex','age','siblings_spouses_aboard','parents_children_aboard','fare'),
       selection = "none",
       class = "compact stripe row-border nowrap",

@@ -2,29 +2,29 @@ navbarPage(
   title = 'Titanic',
   theme = bslib::bs_theme(bootswatch = "cerulean"),
   #ui de la tab Modelo
-  tabPanel('Modelo',titlePanel(h1("Modelo LOGIT", align = 'center')),
+  tabPanel('Model',titlePanel(h1("¿Would you survive?", align = 'center')),
            # Sidebar with a slider input for number of bins 
            sidebarLayout(
              sidebarPanel(
-               numericInput("edad", label = "Ingresa tu edad", value = 0),
-               selectInput("sexo", label = "Selecciona tu sexo", 
-                           choices = list("Mujer" = "female", "Hombre" = "male"), 
-                           selected = "Mujer"),
-               selectInput("clase", label = "Selecciona tu clase", 
+               numericInput("edad", label = "Write down your age", value = 0),
+               selectInput("sexo", label = "Select gender", 
+                           choices = list("Female" = "female", "Male" = "male"), 
+                           selected = "Female"),
+               selectInput("clase", label = "Select class", 
                            choices = list("1" = 1, "2" = 2, "3"=3), 
                            selected = "1"),
-               numericInput("acomp", label = "Número de hermanos y/o cónyuges que te acompañan", value = 0),
-               numericInput("hijos", label = "Número de padres y/o hijos que te acompañan", value = 0),
-               actionButton("proba", "Calcular")
+               numericInput("acomp", label = "Write down number of siblings/spouses aboard", value = 0),
+               numericInput("hijos", label = "Write down number of parents/children aboard", value = 0),
+               actionButton("proba", "Calculate")
              ),
              
              # Show a plot of the generated distribution
              mainPanel(
-               withMathJax(h3("Survived ~ class + sex + age + #sibblings/espouse + #children/parents", style = "font-family: papyrus; color:black;")),
+               #withMathJax(h3("Survived ~ class + sex + age + #sibblings/espouse + #children/parents", style = "font-family: papyrus; color:black;")),
                tags$br(),
                tags$br(),
 
-               h5("La probabilidad de que hubieras sobrevivido en el accidente del Titanic es:" , style = "color:black;"),
+               h5("The probability that you would have survived the Titanic is :" , style = "color:black;"),
                tags$br(),
                h4(textOutput("txtproba"), align = 'center'),
              
@@ -33,14 +33,14 @@ navbarPage(
            )
   ),
   #ui de la tab CRUD
-  tabPanel('CRUD', titlePanel(""),
+  tabPanel('Admin console', titlePanel(""),
            
            fluidPage(
              shinyFeedback::useShinyFeedback(),
              shinyjs::useShinyjs(),
              # Application Title
              titlePanel(
-               h1("Database", align = 'center'),
+               h1("_", align = 'center'),
                windowTitle = "Shiny CRUD Application"
              ),
              passengers_table_module_ui("passengers_table")
@@ -48,27 +48,36 @@ navbarPage(
            
   ),
   #ui de la tab Visualizaciones
-  tabPanel('Visualizaciones', 
+  tabPanel('Visualizations', 
            titlePanel(""),
            
            fluidPage(
              
-             # Show a plot of the generated distribution
-               h4("Matriz de Correlaciones", align = 'center'),
-               plotOutput("corMat"),
-               tags$br(),
-               tags$br(),
-               h4("Histograma", align = 'center'),
-               fluidRow(
-                 column(3,
-                        selectInput("VAR", label = "Selecciona la variable",
-                                     choices = list("Sex" = "Sex", "Class" = "Pclass", "Age" = "Age"),
-                                     selected = "Sex"),
-                 ),
-                 column(9, 
-                        plotOutput("surv")
-                 )
+            
+             fluidRow(
+               column(1,
+                      h4("Histogram", align = 'center'),
+                      selectInput("VAR", label = "Select:",
+                                  choices = list("Sex" = "sex", "Class" = "pclass", "Survived" = "age"),
+                                  selected = "Sex"),
                ),
+               column(5, 
+                      h4("_", align='center'),
+                      plotOutput("surv")
+               ),
+               
+               column(5,
+               
+                 # Show a plot of the generated distribution
+                 h4("Correlation atrix", align = 'center'),
+                 plotOutput("corMat"),
+                 tags$br(),
+                 tags$br(),
+               )
+               
+             ),
+             
+             
              
            )       
   )

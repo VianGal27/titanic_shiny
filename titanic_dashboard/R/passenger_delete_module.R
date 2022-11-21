@@ -18,7 +18,7 @@ passenger_delete_module <- function(input, output, session, modal_title, passeng
   # Observes trigger for this module (here, the Delete Button)
   observeEvent(modal_trigger(), {
     # Authorize who is able to access particular buttons (here, modules)
-    req(session$userData$email == 'tycho.brahe@tychobra.com')
+    req(session$userData$email == 'aguilaral24@gmail.com')
 
     showModal(
       modalDialog(
@@ -28,7 +28,7 @@ passenger_delete_module <- function(input, output, session, modal_title, passeng
           h2(
             style = "line-height: 1.75;",
             paste0(
-              'Are you sure you want to delete the passenger "',
+              '¿Are you sure you want to delete the passenger "',
               passenger_to_delete()$name,
               '"?'
             )
@@ -65,10 +65,10 @@ passenger_delete_module <- function(input, output, session, modal_title, passeng
       )
 
       session$userData$mtpassengers_trigger(session$userData$mtpassengers_trigger() + 1)
-      showToast("success", "passenger Successfully Deleted")
+      showToast("success", "¡passenger deleted successfully!")
     }, error = function(error) {
 
-      msg <- "Error Deleting passenger"
+      msg <- "¡Error at deleting passenger!"
       # print `msg` so that we can find it in the logs
       print(msg)
       # print the actual error to log it

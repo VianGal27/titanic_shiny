@@ -205,7 +205,7 @@ passenger_edit_module <- function(input, output, session, modal_title, passenger
       }
 
       session$userData$mtpassengers_trigger(session$userData$mtpassengers_trigger() + 1)
-      showToast("success", paste0(modal_title, " Successs"))
+      showToast("success", paste0(modal_title, "success"))
     }, error = function(error) {
 
       msg <- paste0(modal_title, " Error")

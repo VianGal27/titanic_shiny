@@ -7,13 +7,13 @@ server <- function(input, output, session) {
   observeEvent(input$proba, {
     single <- data.frame(
       stringsAsFactors = FALSE,
-      Pclass = as.numeric(input$clase),
-      Sex = input$sexo,
-      Age = input$edad,
+      pclass = as.numeric(input$clase),
+      sex = input$sexo,
+      age = input$edad,
       Siblings_Spouses = input$acomp,
-    Parents_Children = input$hijos
+      Parents_Children = input$hijos
   )
-    preduno <- predict(TitanicLog, type = "response", newdata = single )
+    preduno <- predict(getDataForLogR(), type = "response", newdata = single )
     
     output$txtproba <- renderText({ preduno })
   })
@@ -21,30 +21,42 @@ server <- function(input, output, session) {
   
   
  ########### CRUD
+  # Use session$userData to store user data that will be needed throughout
+  # the Shiny application
+  session$userData$email <- 'aguilaral24@gmail.com'
+  
   #Call the server function portion of the `passengers_table_module.R` module file
   callModule(
     passengers_table_module,
     "passengers_table"
   )
 
+  prepareDataDB <- function(datos){
+    datos <- rename(datos,  Siblings_Spouses= siblings_spouses_aboard)
+    datos <- rename(datos, Parents_Children = parents_children_aboard)
+    datos <- mutate(datos, Family_size = Siblings_Spouses+Parents_Children)
+    datos
+  }
   
   
   ########## visualizaciones
   output$corMat <- renderPlot({
+    datos <- prepareDataDB(dbGetQuery(conn,"SELECT * FROM titanic"))
     datos %>% 
-    dplyr::select(Survived,Pclass,Age,Fare,Siblings_Spouses, Parents_Children,Family_size) -> Data
+    dplyr::select(survived,pclass,age,fare,Siblings_Spouses, Parents_Children,Family_size) -> Data
     M <- round(cor(Data),2)
     corrplot::corrplot(M, method="number", type="upper", col= wes_palette("Zissou1"))
   })
 
    output$surv <- renderPlot({
-    datos <- mutate(datos, Pclass = factor(datos$Pclass, order=TRUE, levels = c(3, 2, 1)))
-    datos$Age = cut(datos$Age, c(0,10,20,30,40,50,60,70,80,100))
-    datos <- mutate(datos, Survived = factor(datos$Survived)) %>%
-              dplyr::select(Survived, VAR = input$VAR )
+    datos <- prepareDataDB(dbGetQuery(conn,"SELECT * FROM titanic"))
+    datos <- mutate(datos, pclass = factor(datos$pclass, order=TRUE, levels = c(3, 2, 1)))
+    datos$Age = cut(datos$age, c(0,10,20,30,40,50,60,70,80,100))
+    datos <- mutate(datos, survived = factor(datos$survived)) %>%
+              dplyr::select(survived, VAR = input$VAR )
 
     cbPalette <- c(    wes_palette("Zissou1") ,"#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")    
-    ggplot(datos, aes(x = Survived, fill = VAR)) +
+    ggplot(datos, aes(x = survived, fill = VAR)) +
     geom_bar(position = position_dodge()) +
     geom_text(stat='count', 
               aes(label=stat(count)), 

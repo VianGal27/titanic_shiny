@@ -4,7 +4,7 @@ library(dplyr)
 library(corrplot)
 library(ggplot2)
 library(stargazer)
-library(arm)
+#library(arm)
 library(MASS)
 library(shiny)
 library(DT)
@@ -23,7 +23,6 @@ db_config <- config::get()$db
 # Create database connection
 conn <- dbConnect(
   RPostgres::Postgres(),
-  #RSQLite::SQLite(),
   dbname = db_config$db_name,
   host = db_config$db_host,
   port = db_config$db_port,
@@ -44,34 +43,43 @@ options(spinner.type = 8)
 
 
 ## DATOS CON TITANIC.CSV
-datos <- read.csv("./data/titanic.csv")
-datos <- as.data.frame(datos)
-datos <- rename(datos, Siblings_Spouses = Siblings.Spouses.Aboard)
-datos <- rename(datos, Parents_Children = Parents.Children.Aboard)
-datos <- mutate(datos, Family_size = Siblings_Spouses+Parents_Children)
+getDataForLogR <- function(){
+  #datos <- read.csv("./data/titanic.csv")
+  print("entrando")
+  datos <- dbGetQuery(conn,"SELECT * FROM titanic")
+  datos <- as.data.frame(datos)
+  #datos <- rename(datos, Siblings_Spouses = Siblings.Spouses.Aboard)
+  #datos <- rename(datos, Parents_Children = Parents.Children.Aboard)
+  datos <- rename(datos,  Siblings_Spouses= siblings_spouses_aboard)
+  datos <- rename(datos, Parents_Children = parents_children_aboard)
+  datos <- mutate(datos, Family_size = Siblings_Spouses+Parents_Children)
+  
+  
+  
+  datos <- mutate(datos, Fare_grps = case_when(between(fare, 0, 60) ~ "0-60",  fare > 60 ~ ">60"))
+  datos$Class_1 = ifelse(datos$pclass == 1,1,0)
+  datos$Class_2 = ifelse(datos$pclass == 2,1,0)
+  datos$Class_3 = ifelse(datos$pclass == 3,1,0)
+  
+  datosLog <- dplyr::select(datos, -fare, -name, -Class_1, -Class_2, -Class_3, -Fare_grps, -Family_size, -id)
+  #datosLog <- mutate(datosLog, Pclass = factor(datosLog$Pclass, order=TRUE, levels = c(3, 2, 1)))
+  datosLog <- mutate(datosLog, survived = factor(datosLog$survived))
+  
+  TitanicLog <- glm(survived ~ . , data = datosLog, family = binomial)
+  summary(TitanicLog)
+  TitanicLog
+}
 
+predictp <- predict(getDataForLogR(), type = "response")
 
-datos <- mutate(datos, Fare_grps = case_when(between(Fare, 0, 60) ~ "0-60",  Fare > 60 ~ ">60"))
-datos$Class_1 = ifelse(datos$Pclass == 1,1,0)
-datos$Class_2 = ifelse(datos$Pclass == 2,1,0)
-datos$Class_3 = ifelse(datos$Pclass == 3,1,0)
-
-datosLog <- dplyr::select(datos, -Fare, -Name, -Class_1, -Class_2, -Class_3, -Fare_grps, -Family_size)
-#datosLog <- mutate(datosLog, Pclass = factor(datosLog$Pclass, order=TRUE, levels = c(3, 2, 1)))
-datosLog <- mutate(datosLog, Survived = factor(datosLog$Survived))
-
-TitanicLog <- glm(Survived ~ . , data = datosLog, family = binomial)
-summary(TitanicLog)
-
-predictp <- predict(TitanicLog, type = "response")
 single <- data.frame(
   stringsAsFactors = FALSE,
-            Pclass = c(3L),
-               Sex = c("female"),
-               Age = c(31L),
+            pclass = c(3L),
+               sex = c("female"),
+               age = c(31L),
   Siblings_Spouses = c(0L),
   Parents_Children = c(0L)
            )
-preduno <- predict(TitanicLog, type = "response", newdata = single )
+preduno <- predict(getDataForLogR(), type = "response", newdata = single )
 
 
