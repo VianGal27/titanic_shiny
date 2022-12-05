@@ -34,7 +34,6 @@ def calcProb():
 @app.route('/entrena', methods=['POST'])
 def entrena():
     # Load dataset
-    #df = pd.read_csv('app/titanic.csv')
     params = json.loads(request.data)
     option = params[0]["option"]
 

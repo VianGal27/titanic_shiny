@@ -18,7 +18,9 @@ server <- function(input, output, session) {
       Siblings_Spouses = input$acomp,
       Parents_Children = input$hijos
   )
-    preduno <- predict(getDataForLogR(), type = "response", newdata = single )
+    
+    #a borrar
+    #preduno <- predict(getDataForLogR(), type = "response", newdata = single )
 
     sexo = 0;#male
     if(input$sexo=="female"){sexo=1}
@@ -75,7 +77,7 @@ server <- function(input, output, session) {
    output$surv <- renderPlot({
     datos <- prepareDataDB(dbGetQuery(conn,"SELECT * FROM titanic"))
     datos <- mutate(datos, pclass = factor(datos$pclass, order=TRUE, levels = c(3, 2, 1)))
-    datos$Age = cut(datos$age, c(0,10,20,30,40,50,60,70,80,100))
+    datos$age = cut(datos$age, c(0,10,20,30,40,50,60,70,80,100))
     datos <- mutate(datos, survived = factor(datos$survived)) %>%
               dplyr::select(survived, VAR = input$VAR )
 

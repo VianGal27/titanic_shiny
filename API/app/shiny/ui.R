@@ -1,9 +1,9 @@
 navbarPage(
   title = 'Titanic',
   theme = bslib::bs_theme(bootswatch = "cerulean"),
+  
   #ui de la tab Modelo
   tabPanel('Model',titlePanel(h1("¿Would you survive?", align = 'center')),
-           # Sidebar with a slider input for number of bins 
            tags$br(),
            tags$br(),
 
@@ -22,7 +22,6 @@ navbarPage(
                actionButton("proba", "Calculate")
              ),
              
-             # Show a plot of the generated distribution
              mainPanel( 
                #withMathJax(h3("Survived ~ class + sex + age + #sibblings/espouse + #children/parents", style = "font-family: papyrus; color:black;")),
              
@@ -45,53 +44,48 @@ navbarPage(
              )
            )
   ),
+
   #ui de la tab CRUD
-  tabPanel('Admin console', titlePanel(""),
+  tabPanel('Admin console', titlePanel(h1("CRUD", align = 'center')),
            
            fluidPage(
              shinyFeedback::useShinyFeedback(),
              shinyjs::useShinyjs(),
-             # Application Title
-             titlePanel(
-               h1("_", align = 'center'),
-               windowTitle = "Shiny CRUD Application"
-             ),
              passengers_table_module_ui("passengers_table")
            )
            
   ),
+
   #ui de la tab Visualizaciones
   tabPanel('Visualizations', 
            titlePanel(""),
            
            fluidPage(
-             
-            
              fluidRow(
                column(1,
-                      h4("Histogram", align = 'center'),
+                      br(),
+                      br(),
                       selectInput("VAR", label = "Select:",
-                                  choices = list("Sex" = "sex", "Class" = "pclass", "Survived" = "age"),
+                                  choices = list("Sex" = "sex", "Class" = "pclass", "Age" = "age"),
                                   selected = "Sex")
                ),
                column(5, 
-                      h4("_", align='center'),
+                      #histograma
+                      h4("Histogram", align = 'center'),
+                      br(),
                       plotOutput("surv")
                ),
                
                column(5,
-               
-                 # Show a plot of the generated distribution
-                 h4("Correlation atrix", align = 'center'),
-                 plotOutput("corMat"),
-                 tags$br(),
-                 tags$br()
+                      #Grafica de correlaciones
+                      h4("Correlation atrix", align = 'center'),
+                      plotOutput("corMat"),
+                      br(),
+                      br()
                )
                
              )
-             
-             
-             
+ 
            )       
   )
 )

@@ -13,7 +13,6 @@ library(shinyFeedback)
 library(dbplyr)
 library(plotly)
 library(wesanderson)
-
 library(tidyverse)
 library(httr)
 library(jsonlite)
@@ -46,12 +45,9 @@ options(spinner.type = 8)
 
 ## DATOS CON TITANIC.CSV
 getDataForLogR <- function(){
-  #datos <- read.csv("./data/titanic.csv")
   print("entrando")
   datos <- dbGetQuery(conn,"SELECT * FROM titanic")
   datos <- as.data.frame(datos)
-  #datos <- rename(datos, Siblings_Spouses = Siblings.Spouses.Aboard)
-  #datos <- rename(datos, Parents_Children = Parents.Children.Aboard)
   datos <- rename(datos,  Siblings_Spouses= siblings_spouses_aboard)
   datos <- rename(datos, Parents_Children = parents_children_aboard)
   datos <- mutate(datos, Family_size = Siblings_Spouses+Parents_Children)
@@ -64,7 +60,6 @@ getDataForLogR <- function(){
   datos$Class_3 = ifelse(datos$pclass == 3,1,0)
   
   datosLog <- dplyr::select(datos, -fare, -name, -Class_1, -Class_2, -Class_3, -Fare_grps, -Family_size, -id)
-  #datosLog <- mutate(datosLog, Pclass = factor(datosLog$Pclass, order=TRUE, levels = c(3, 2, 1)))
   datosLog <- mutate(datosLog, survived = factor(datosLog$survived))
   
   TitanicLog <- glm(survived ~ . , data = datosLog, family = binomial)
