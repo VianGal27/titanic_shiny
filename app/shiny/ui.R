@@ -1,14 +1,15 @@
+
 navbarPage(
   title = 'Titanic',
   theme = bslib::bs_theme(bootswatch = "cerulean"),
   
-  #ui de la tab Modelo
+  ### MODEL TAB UI
   tabPanel('Model',titlePanel(h1("¿Would you survive?", align = 'center')),
            tags$br(),
            tags$br(),
 
            sidebarLayout(            
-
+            #variables to use as a new observation to be predicted 
              sidebarPanel(
                numericInput("edad", label = "Write down your age", value = 0),
                selectInput("sexo", label = "Select gender", 
@@ -23,10 +24,10 @@ navbarPage(
              ),
              
              mainPanel( 
-               #withMathJax(h3("Survived ~ class + sex + age + #sibblings/espouse + #children/parents", style = "font-family: papyrus; color:black;")),
-             
+              #Prediction of a new observation              
                sidebarPanel(
                    h5("The probability that you would have survived the Titanic is :" , style = "color:black;"),
+                   tags$br(),
                    tags$br(),
                    h4(textOutput("txtproba"), align = 'center'),  
                    style="width:200%"
@@ -34,20 +35,20 @@ navbarPage(
 
                tags$br(),
                tags$br(),
-
+              #Retraining of the model 
                sidebarPanel(
-                actionButton("entrena", "Entrenar modelo"),
+                actionButton("entrena", "Retrain model"),
                 h4(textOutput("entrenado"), align = 'right'), 
                 style=""
-               )
-               
+               ),
+               img(src="titanic.jpeg",height = '345px', width = '490px',align = 'right')
              )
            )
   ),
 
-  #ui de la tab CRUD
+  #### CRUD TAB UI
   tabPanel('Admin console', titlePanel(h1("CRUD", align = 'center')),
-           
+           #datatable with titanic info
            fluidPage(
              shinyFeedback::useShinyFeedback(),
              shinyjs::useShinyjs(),
@@ -56,13 +57,14 @@ navbarPage(
            
   ),
 
-  #ui de la tab Visualizaciones
+  ### VISUALIZATIONS TAB UI
   tabPanel('Visualizations', 
            titlePanel(""),
            
            fluidPage(
              fluidRow(
                column(1,
+                      #Histogram control variable input
                       br(),
                       br(),
                       selectInput("VAR", label = "Select:",
@@ -70,15 +72,15 @@ navbarPage(
                                   selected = "Sex")
                ),
                column(5, 
-                      #histograma
+                      #Histogram plots
                       h4("Histogram", align = 'center'),
                       br(),
                       plotOutput("surv")
                ),
                
                column(5,
-                      #Grafica de correlaciones
-                      h4("Correlation atrix", align = 'center'),
+                      #Correlation plot
+                      h4("Correlation Matrix", align = 'center'),
                       plotOutput("corMat"),
                       br(),
                       br()

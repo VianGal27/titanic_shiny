@@ -1,14 +1,9 @@
-library(shiny)
-library(tidyverse)
-library(httr)
-library(jsonlite)
-library(DT)
 
 server <- function(input, output, session) {
-  ########## modelo
-  output$value <- renderPrint({ input$edad })
+  ########## MODEL 
+  #output$value <- renderPrint({ input$edad })
   
-  #Predicción
+  #Prediction
   observeEvent(input$proba, {
     single <- data.frame(
       stringsAsFactors = FALSE,
@@ -18,37 +13,30 @@ server <- function(input, output, session) {
       Siblings_Spouses = input$acomp,
       Parents_Children = input$hijos
   )
-    
-    #a borrar
-    #preduno <- predict(getDataForLogR(), type = "response", newdata = single )
 
-    sexo = 0;#male
+    sexo <- 0 #male
     if(input$sexo=="female"){sexo=1}
 
     proba =  resp <- POST('web:8080/getProbaSurvive', body=toJSON(data.frame(age=input$edad, sex=sexo, class=input$clase,
                                                                              companion=input$acomp, children=input$hijos)))
-    proba = content(proba, as='text')
-    #print("preduno")
-
-    #output$txtproba <- renderText({ preduno })
-    output$txtproba <- renderText({ proba })
+    proba <- content(proba, as='text') 
+    output$txtproba <- renderText({ paste0(as.numeric(proba) * 100,"%") })
   })
   
-  #Entrenamiento
+  #Training
   entrena <-function(option="entrenar"){
     POST('web:8080/entrena',body=toJSON(data.frame(option=option)))
   }
 
   output$entrenado <- renderText(content(entrena("entrenar"),as='text'))
 
-  #Reentrenamiento
+  #Retraining
   observeEvent(input$entrena, {
-    output$entrenado <- renderText(content(entrena("reentrenar"),as='text'))
+    output$entrenado <- renderText(content(entrena("Retrain model"),as='text'))
   })
   
-  ########### CRUD
+  ########### CRUD 
   # Use session$userData to store user data that will be needed throughout
-  # the Shiny application
   session$userData$email <- 'aguilaral24@gmail.com'
   
   #Call the server function portion of the `passengers_table_module.R` module file
@@ -65,7 +53,7 @@ server <- function(input, output, session) {
   }
   
   
-  ########## visualizaciones
+  ########## VISUALIZATIONS 
   output$corMat <- renderPlot({
     datos <- prepareDataDB(dbGetQuery(conn,"SELECT * FROM titanic"))
     datos %>% 
@@ -73,7 +61,7 @@ server <- function(input, output, session) {
     M <- round(cor(Data),2)
     corrplot::corrplot(M, method="number", type="upper", col= wes_palette("Zissou1"))
   })
-
+   
    output$surv <- renderPlot({
     datos <- prepareDataDB(dbGetQuery(conn,"SELECT * FROM titanic"))
     datos <- mutate(datos, pclass = factor(datos$pclass, order=TRUE, levels = c(3, 2, 1)))
@@ -88,7 +76,8 @@ server <- function(input, output, session) {
               aes(label=stat(count)), 
               position = position_dodge(width=1), vjust=-0.5) + 
               guides(fill=guide_legend(title=input$VAR)) +
-              scale_fill_manual(values = cbPalette )
+              scale_fill_manual(values = cbPalette ) + 
+              scale_x_discrete(labels=c("0" = "No", "1" = "Yes"))
     
 
   })

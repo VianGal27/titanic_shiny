@@ -9,13 +9,13 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 import pickle
 
-# Estructura del uri:
-# "motor://user:password@host:port/database"
+# Uri structure:
 database_uri = f'postgresql://{os.environ["PGUSR"]}:{os.environ["PGPASS"]}@{os.environ["PGHOST"]}:5432/{os.environ["PGDB"]}'
 
 app = Flask(__name__)
 conn = psycopg2.connect(database_uri)
 
+#To predict the probablity for a new observation 
 @app.route('/getProbaSurvive',methods=["POST"])
 def calcProb():
     params = json.loads(request.data)
@@ -58,9 +58,9 @@ def entrena():
     pickle.dump(rf_model, open(filename, 'wb'))
 
     if(option=="entrenar"):
-        return "Modelo entrenado"
+        return "Trained Model"
     else:
-        return "Modelo re-entrenado"
+        return "Retrained Model"
     
 
 
