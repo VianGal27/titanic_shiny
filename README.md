@@ -1,4 +1,5 @@
-Autores: 
+# Autores: 
+
     *   Galindo Añel Vianey Jerusalen
     *   García Aguilar Luis Alberto
     *   Granillo Alatorre Ricardo GUillermo
@@ -10,7 +11,7 @@ La aplicación aquí contenida pretende hacer un análisis a los datos de
 sobrevivientes del titanic presentando los resultados de manera gráfica e interactiva. 
 Adicionalmente se incluye una administración básica para los datos y su análisis.
 
-1. Modulos
+# 1. Modulos
 
 La aplicación cuenta con los siguientes módulos:
 
@@ -55,7 +56,7 @@ La aplicación cuenta con los siguientes módulos:
         *   Contamos con una gráfica interactiva, implementada en R, que muestra los sobrevivientes del titanic de acuerdo actualizar
             la opción elegida en un combo box (opciones: sexo, clase y edad de los pasajeros)
 
-2. COmponentes
+# 2. Componentes
 
     a.  Base de datos
 
